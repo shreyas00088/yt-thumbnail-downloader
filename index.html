@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YT Thumbnail Grabber</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; background: #f0f0f0; }
+    input { width: 80%; max-width: 400px; padding: 10px; font-size: 16px; margin-top: 20px; }
+    button { padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer; }
+    img { margin-top: 20px; max-width: 90%; border: 1px solid #ccc; }
+    a.download-btn { display: inline-block; margin-top: 10px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>YouTube Thumbnail Grabber</h1>
+  <input id="ytLink" type="text" placeholder="Paste YouTube video link here" />
+  <br />
+  <button onclick="showThumbnail()">Get Thumbnail</button>
+  <div id="result"></div>
+
+  <script>
+    function showThumbnail() {
+      const link = document.getElementById('ytLink').value.trim();
+      const videoIdMatch = link.match(/v=([^&]+)/) || link.match(/youtu\.be\/([^?&]+)/);
+      if (!videoIdMatch) {
+        alert('Please enter a valid YouTube video link!');
+        return;
+      }
+      const videoId = videoIdMatch[1];
+      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      document.getElementById('result').innerHTML = `
+        <img src="${thumbnailUrl}" alt="Thumbnail" />
+        <br />
+        <a class="download-btn" href="${thumbnailUrl}" download="thumbnail.jpg">Download Thumbnail</a>
+      `;
+    }
+  </script>
+</body>
+</html>
