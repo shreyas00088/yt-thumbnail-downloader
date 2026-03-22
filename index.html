@@ -1,25 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>YT Thumbnail Grabber</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; background: #f0f0f0; }
-    input { width: 80%; max-width: 400px; padding: 10px; font-size: 16px; margin-top: 20px; }
-    button { padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer; }
-    img { margin-top: 20px; max-width: 90%; border: 1px solid #ccc; }
-    a.download-btn { display: inline-block; margin-top: 10px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
-  </style>
-</head>
-<body>
-  <h1>YouTube Thumbnail Grabber</h1>
-  <input id="ytLink" type="text" placeholder="Paste YouTube video link here" />
-  <br />
-  <button onclick="showThumbnail()">Get Thumbnail</button>
-  <div id="result"></div>
 
-  <script>
+<title>Free YouTube Thumbnail Downloader HD</title>
+
+<meta name="description" content="Download YouTube thumbnails in HD, HQ, and SD quality for free. Easy and fast tool.">
+
+<style>
+body {
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  font-family: Arial;
+  text-align: center;
+  color: white;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+input {
+  padding: 12px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  padding: 12px 20px;
+  background: #ff4b2b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff416c;
+}
+
+img {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>YouTube Thumbnail Downloader</h1>
+
+<input type="text" id="url" placeholder="Paste YouTube Link">
+<br><br>
+<button onclick="getThumb()">Get Thumbnail</button>
+
+<div id="output"></div>
+
+<p>
+This free YouTube thumbnail downloader allows you to download thumbnails in HD, HQ, and SD quality.
+Just paste your video link and get high-quality thumbnails instantly.
+</p>
+
+<script>
 function getVideoId(url) {
   let regExp = /(?:youtube\.com.*v=|youtu\.be\/)([^&]+)/;
   let match = url.match(regExp);
@@ -48,7 +94,7 @@ function getThumb() {
     html += `
       <div>
         <h3>${size.name} Quality</h3>
-        <img src="${link}" width="300">
+        <img src="${link}">
         <br>
         <a href="${link}" download style="color:yellow;">Download</a>
       </div>
@@ -59,61 +105,5 @@ function getThumb() {
 }
 </script>
 
-<style>
-body {
-  background: linear-gradient(to right, #1e3c72, #2a5298);
-  font-family: Arial;
-  text-align: center;
-  color: white;
-}
-
-h1 {
-  font-size: 40px;
-  font-weight: bold;
-}
-
-input {
-  padding: 12px;
-  width: 250px;
-  border-radius: 8px;
-  border: none;
-}
-
-button {
-  padding: 12px 20px;
-  background: #ff4b2b;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #ff416c;
-}
-
-img {
-  margin-top: 10px;
-  border-radius: 10px;
-}
-</style>
-<title>Free YouTube Thumbnail Downloader HD</title>
-<p>
-This free YouTube thumbnail downloader allows you to download thumbnails in HD, HQ, and SD quality.
-Just paste your video link and get high-quality thumbnails instantly.
-</p>
-
-  img {
-  width: 100%;
-  max-width: 300px;
-}
-
-input {
-  width: 80%;
-}
-<meta name="description" content="Download YouTube thumbnails in HD, HQ, and SD quality for free. Easy and fast YouTube thumbnail downloader tool.">
-   <button onclick="getThumb()">Get Thumbnail</button>   
-    }
-  </script>
 </body>
 </html>
