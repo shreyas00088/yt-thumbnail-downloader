@@ -66,55 +66,28 @@ Just paste your video link and get high-quality thumbnails instantly.
 </p>
 
 <script>
-function getVideoId(url) {
-  let regExp = /(?:youtube\.com.*v=|youtu\.be\/)([^&]+)/;
-  let match = url.match(regExp);
-  return match ? match[1] : null;
+html += `
+  <div style="margin:30px 0; background:white; padding:15px; border-radius:10px; color:black;">
+    
+    <h3>${size.name} Image</h3>
+    
+    <img src="${link}" style="max-width:100%; border-radius:10px;">
+    
+    <br><br>
+    
+    <a href="${link}" download 
+       style="background:#007bff; color:white; padding:10px 15px; text-decoration:none; border-radius:5px;">
+       Download ${size.name} Thumbnail
+    </a>
+
+    body {
+  background: #f4f4f4;
+  font-family: Arial;
+  text-align: center;
 }
-
-function checkImage(url) {
-  return new Promise(resolve => {
-    let img = new Image();
-    img.src = url;
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-  });
-}
-
-async function getThumb() {
-  let url = document.getElementById("url").value;
-  let id = getVideoId(url);
-
-  if (!id) {
-    alert("Invalid URL");
-    return;
-  }
-
-  let sizes = [
-    {name: "HD", file: "maxresdefault.jpg"},
-    {name: "HQ", file: "hqdefault.jpg"},
-    {name: "SD", file: "sddefault.jpg"}
-  ];
-
-  let html = "";
-
-  for (let size of sizes) {
-    let link = `https://img.youtube.com/vi/${id}/${size.file}`;
-    let exists = await checkImage(link);
-
-    if (exists) {
-      html += `
-        <div>
-          <h3>${size.name} Quality</h3>
-          <img src="${link}">
-          <br>
-          <a href="${link}" download style="color:yellow;">Download</a>
-        </div>
-      `;
-    }
-  }
-
-  document.getElementById("output").innerHTML = html;
+    
+  </div>
+`;
 }
 </script>
 }
