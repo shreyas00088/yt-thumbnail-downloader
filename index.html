@@ -20,20 +20,99 @@
   <div id="result"></div>
 
   <script>
-    function showThumbnail() {
-      const link = document.getElementById('ytLink').value.trim();
-      const videoIdMatch = link.match(/v=([^&]+)/) || link.match(/youtu\.be\/([^?&]+)/);
-      if (!videoIdMatch) {
-        alert('Please enter a valid YouTube video link!');
-        return;
-      }
-      const videoId = videoIdMatch[1];
-      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-      document.getElementById('result').innerHTML = `
-        <img src="${thumbnailUrl}" alt="Thumbnail" />
-        <br />
-        <a class="download-btn" href="${thumbnailUrl}" download="thumbnail.jpg">Download Thumbnail</a>
-      `;
+function getVideoId(url) {
+  let regExp = /(?:youtube\.com.*v=|youtu\.be\/)([^&]+)/;
+  let match = url.match(regExp);
+  return match ? match[1] : null;
+}
+
+function getThumb() {
+  let url = document.getElementById("url").value;
+  let id = getVideoId(url);
+
+  if (!id) {
+    alert("Invalid URL");
+    return;
+  }
+
+  let sizes = [
+    {name: "HD", file: "maxresdefault.jpg"},
+    {name: "HQ", file: "hqdefault.jpg"},
+    {name: "SD", file: "sddefault.jpg"}
+  ];
+
+  let html = "";
+
+  sizes.forEach(size => {
+    let link = `https://img.youtube.com/vi/${id}/${size.file}`;
+    html += `
+      <div>
+        <h3>${size.name} Quality</h3>
+        <img src="${link}" width="300">
+        <br>
+        <a href="${link}" download style="color:yellow;">Download</a>
+      </div>
+    `;
+  });
+
+  document.getElementById("output").innerHTML = html;
+}
+</script>
+
+<style>
+body {
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  font-family: Arial;
+  text-align: center;
+  color: white;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+input {
+  padding: 12px;
+  width: 250px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  padding: 12px 20px;
+  background: #ff4b2b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff416c;
+}
+
+img {
+  margin-top: 10px;
+  border-radius: 10px;
+}
+</style>
+<title>Free YouTube Thumbnail Downloader HD</title>
+<p>
+This free YouTube thumbnail downloader allows you to download thumbnails in HD, HQ, and SD quality.
+Just paste your video link and get high-quality thumbnails instantly.
+</p>
+
+  img {
+  width: 100%;
+  max-width: 300px;
+}
+
+input {
+  width: 80%;
+}
+<meta name="description" content="Download YouTube thumbnails in HD, HQ, and SD quality for free. Easy and fast YouTube thumbnail downloader tool.">
+      
     }
   </script>
 </body>
