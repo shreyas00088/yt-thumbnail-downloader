@@ -72,7 +72,16 @@ function getVideoId(url) {
   return match ? match[1] : null;
 }
 
-function getThumb() {
+function checkImage(url) {
+  return new Promise(resolve => {
+    let img = new Image();
+    img.src = url;
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+  });
+}
+
+async function getThumb() {
   let url = document.getElementById("url").value;
   let id = getVideoId(url);
 
@@ -89,19 +98,25 @@ function getThumb() {
 
   let html = "";
 
-  sizes.forEach(size => {
+  for (let size of sizes) {
     let link = `https://img.youtube.com/vi/${id}/${size.file}`;
-    html += `
-      <div>
-        <h3>${size.name} Quality</h3>
-        <img src="${link}">
-        <br>
-        <a href="${link}" download style="color:yellow;">Download</a>
-      </div>
-    `;
-  });
+    let exists = await checkImage(link);
+
+    if (exists) {
+      html += `
+        <div>
+          <h3>${size.name} Quality</h3>
+          <img src="${link}">
+          <br>
+          <a href="${link}" download style="color:yellow;">Download</a>
+        </div>
+      `;
+    }
+  }
 
   document.getElementById("output").innerHTML = html;
+}
+</script>
 }
 </script>
 
